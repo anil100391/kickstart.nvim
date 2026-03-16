@@ -959,3 +959,25 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Navigate quick fix list
+vim.keymap.set('n', '<leader>n', '<cmd>cnext<CR>', { desc = 'Go to [N]ext quickfix item' })
+vim.keymap.set('n', '<leader>p', '<cmd>cprev<CR>', { desc = 'Go to [N]ext quickfix item' })
+
+-- floating terminal
+local fwindow = require 'custom.plugins'
+vim.api.nvim_create_user_command('ToggleFloatingTerminal', fwindow.toggle_floating_terminal, {})
+vim.keymap.set('n', '<leader>tt', ':ToggleFloatingTerminal<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>b', ':!cmake --build build<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>r', ':!build\\Debug\\main.exe<CR>', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>tr', ':Telescope resume<CR>', { noremap = true, silent = true })
+
+-- make commit email
+local gitmail = require 'custom.plugins.gitmsg'
+vim.api.nvim_create_user_command('Gitmail', gitmail.show_my_commits, {})
+
+-- cmake configure and build using vcpkg
+vim.keymap.set('n', '<leader>bg', '<cmd>!cmake -B build -S . --toolchain C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja<CR>')
+vim.keymap.set('n', '<leader>b', '<cmd>!cmake --build build<CR>')
+vim.keymap.set('n', '<leader>br', '<cmd>!build\\vulkan.exe<CR>')
